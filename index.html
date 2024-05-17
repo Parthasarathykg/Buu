@@ -1,72 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Buu</title>
-
-
-  <button onclick="printBUU()">Print Letter A</button>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pattern B with Asterisks</title>
 </head>
 
 <body>
-  <h3>Buu</h3>
+  <h1>Pattern B</h1>
+  <pre id="pattern"></pre>
 
   <script>
-    let height = 5;
-    // Number of character width in each line 
-    let width = (2 * height) - 1;
-
-    // Function to find the absolute value 
-    // of a number D 
-    const abs = (d) => {
-      return d < 0 ? -1 * d : d;
+    // Function to generate the pattern string
+    function printPatternB(rows) {
+      let pattern = "";
+      for (let i = 0; i < rows; i++) {
+        let str = "";
+        if (i === 0 || i === rows - 1) {
+          str = "*".repeat(rows);
+        } else {
+          str += "*";
+          for (let j = 0; j < rows - 2; j++) {
+            str += (j === Math.floor((rows - 1) / 2)) ? "*" : " ";
+          }
+          str += "*";
+        }
+        pattern += str + "\n"; // Add newline for each row
+      }
+      return pattern;
     }
 
-    // Function to print the pattern of 'B' 
-    const printBUU = () => {
-      let height = 5;
-      let width = 5;
-      let i, j, half = parseInt(height / 2);
-      for (i = 0; i < height; i++) {
-        document.write("*");
-        for (j = 0; j < width; j++) {
-          if ((i == 0 || i == height - 1 || i == half)
-            && j < (width - 2))
-            document.write("*");
-          else if ((j == (width - 2) && (i != 0 && i != height - 1 && i != half))
-            || (j == 0 && (i == 1 || i == height - 2)))
-            document.write("*");
-          else
-            document.write("  ");
-        }
-        document.write(`<br/>`);
-      }
-      printU();
-      printU();
-    }
+    // Set the number of rows
+    const rows = 7;
 
-    // Function to print the pattern of 'U' 
-    const printU = () => {
-      let i, j;
-      for (i = 0; i < height; i++) {
-        if (i != 0 && i != height - 1)
-          document.write("*");
-        else
-          document.write(" ");
-        for (j = 0; j < height; j++) {
-          if (((i == height - 1)
-            && j >= 0
-            && j < height - 1))
-            document.write("*");
-          else if (j == height - 1 && i != 0
-            && i != height - 1)
-            document.write("*");
-          else
-            document.write("  ");
-        }
-        document.write(`<br/>`);
-      }
-    } 
+    // Get the pattern element
+    const patternElement = document.getElementById("pattern");
+
+    // Generate and display the pattern
+    patternElement.textContent = printPatternB(rows);
   </script>
 </body>
 
